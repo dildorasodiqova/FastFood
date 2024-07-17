@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.example.fastfood.dtos.createDto.MealCreateDto;
+import uz.example.fastfood.dtos.createDto.OrderMealDTO;
 import uz.example.fastfood.dtos.responcseDto.MealResponseDto;
 import uz.example.fastfood.enties.MealEntity;
 import uz.example.fastfood.exception.DataAlreadyExistsException;
@@ -11,6 +12,7 @@ import uz.example.fastfood.exception.DataNotFoundException;
 import uz.example.fastfood.repository.MealRepository;
 import uz.example.fastfood.service.categoryService.CategoryService;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -73,6 +75,13 @@ public class MealServiceImpl implements MealService{
     @Override
     public void deleteMeal(UUID id) {
         mealRepository.softDeleteById(id);
+    }
+
+    @Override
+    public BigDecimal calculateCost(List<OrderMealDTO> meals) {
+        Long res = 0L;
+        for (OrderMealDTO meal : meals) res += mealRepository.sumPrice(meal.getMealId(), meal.getAmount());
+        return new BigDecimal(res);
     }
 
 }

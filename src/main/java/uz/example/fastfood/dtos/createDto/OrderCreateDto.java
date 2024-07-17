@@ -1,5 +1,6 @@
 package uz.example.fastfood.dtos.createDto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,10 @@ import java.util.UUID;
 @Getter
 @Setter
 public class OrderCreateDto {
-    private UUID userId;
-    private List<UUID> mealIds;
-    private Location location;
-    private BigDecimal totalCost;
+
+    @NotEmpty(message = "Meals not empty!")
+    private List<OrderMealDTO> meals;
+
+    private LocationDto location;
+
 }

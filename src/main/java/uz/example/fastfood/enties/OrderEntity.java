@@ -16,14 +16,20 @@ import java.util.List;
 @Setter
 @Entity(name = "orders")
 public class OrderEntity extends BaseEntity {
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @Column(name = "user_id")
+    private UUID userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private UserEntity user;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> orderItems;
 
     private BigDecimal totalCost;
+
     private int estimatedDeliveryTime;
 
-
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }

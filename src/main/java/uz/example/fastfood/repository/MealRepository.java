@@ -20,4 +20,7 @@ public interface MealRepository extends JpaRepository<MealEntity, UUID> {
     @Transactional
     @Query("UPDATE meals m SET m.isActive = false WHERE m.id = :id")
     void softDeleteById(UUID id);
+
+    @Query("select sum((m.cost * ?2))  from meals m where m.id = ?1")
+    Long sumPrice(UUID id, Integer amount1);
 }

@@ -24,4 +24,8 @@ public class BaseResponse<T> {
     public static <T> BaseResponse<T> success(T data) {
         return new BaseResponse<>("Success", 200, data);
     }
+
+    public static BaseResponse<?> successDefault() {
+        return BaseResponse.success(null);
+    }
 }
