@@ -5,7 +5,6 @@ import uz.example.fastfood.dtos.responcseDto.CategoryResponseDto;
 import uz.example.fastfood.enties.CategoryEntity;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface CategoryService {

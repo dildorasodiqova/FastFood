@@ -13,12 +13,7 @@ import uz.example.fastfood.dtos.request.RegisterReqDTO;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
 import uz.example.fastfood.service.userService.UserService;
 
-/**
- * @author Admin on 7/17/2024
- * @project FastFood
- * @package uz.example.fastfood.controller
- * @contact @sarvargo
- */
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor

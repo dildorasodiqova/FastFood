@@ -1,19 +1,17 @@
-package uz.example.fastfood.enties;
+package uz.example.fastfood.dtos.createDto;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.example.fastfood.enties.Location;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "branch")
-public class BranchEntity extends BaseEntity {
+public class BranchCreateDto {
     private String moljal;
     private String name;
     private Location location;
-
 }

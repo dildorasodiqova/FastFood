@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public CategoryResponseDto createCategory(CategoryCreateDto dto) {
         if (categoryRepository.findByName(dto.getName()).isPresent()){
-            throw  new DataAlreadyExistsException("Category with the same name already exists"));
+            throw  new DataAlreadyExistsException("Category with the same name already exists");
         }
         CategoryEntity save = categoryRepository.save(modelMapper.map(dto, CategoryEntity.class));
         return map(save);
@@ -44,6 +44,13 @@ public class CategoryServiceImpl implements CategoryService{
     public void deleteCategory(UUID id) {
         categoryRepository.softDeleteById(id);
     }
+
+    @Override
+    public CategoryEntity findById(UUID categoryId) {
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new DataNotFoundException("Category not found."));
+
+    }
+
     private CategoryResponseDto map(CategoryEntity entity){
         return modelMapper.map(entity, CategoryResponseDto.class);
     }
