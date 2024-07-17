@@ -63,4 +63,8 @@ public class OrderServiceImpl implements OrderService {
     public BaseResponse<PageImpl<?>> getAll(int page, int size) {
         return null;
     }
+    @Override
+    public BaseResponse<PageImpl<?>> getAllAsUser(UUID userId, int page, int size) {
+        return null;
+    }
 }

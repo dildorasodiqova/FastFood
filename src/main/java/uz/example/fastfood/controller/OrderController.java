@@ -12,6 +12,8 @@ import uz.example.fastfood.dtos.request.order.OrderUpdateStatusReqDTO;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
 import uz.example.fastfood.service.orderService.OrderService;
 
+import java.util.UUID;
+
 /**
  * @author Admin on 7/17/2024
  * @project FastFood
@@ -50,6 +52,16 @@ public class OrderController {
                                                             @RequestParam(value = "size", defaultValue = "50") int size) {
         log
                 .info("get all page = {} size = {}", page, size);
-        return ResponseEntity.ok(orderService.getAll(page,size));
+        return ResponseEntity.ok(orderService.getAll(page, size));
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<BaseResponse<PageImpl<?>>> getAllAsUser(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                                  @RequestParam(value = "size", defaultValue = "50") int size) {
+        log
+                .info("get all page = {} size = {}", page, size);
+        // todo userId
+        return ResponseEntity.ok(orderService.getAllAsUser(UUID.fromString(""),page, size));
     }
 }
