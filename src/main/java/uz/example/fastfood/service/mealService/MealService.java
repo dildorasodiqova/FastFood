@@ -1,9 +1,11 @@
 package uz.example.fastfood.service.mealService;
 
 import uz.example.fastfood.dtos.createDto.MealCreateDto;
+import uz.example.fastfood.dtos.createDto.OrderMealDTO;
 import uz.example.fastfood.dtos.responcseDto.MealResponseDto;
 import uz.example.fastfood.enties.MealEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,4 +16,6 @@ public interface MealService {
     MealResponseDto updateMeal(UUID id, MealCreateDto dto);
 
     void deleteMeal(UUID id);
+
+    BigDecimal calculateCost(List<OrderMealDTO> meals);
 }
