@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class BranchController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of branches")
     })
+    @PermitAll
     @GetMapping
     public ResponseEntity<List<BranchResponseDto>> getAllBranches() {
         List<BranchResponseDto> branches = branchService.getAllBranches();
@@ -39,6 +41,7 @@ public class BranchController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved branch"),
             @ApiResponse(responseCode = "404", description = "Branch not found")
     })
+    @PermitAll
     @GetMapping("/{id}")
     public ResponseEntity<BranchResponseDto> getBranchById(@PathVariable UUID id) {
         BranchResponseDto branch = branchService.getBranchById(id);
@@ -90,6 +93,7 @@ public class BranchController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved the nearest branch"),
             @ApiResponse(responseCode = "404", description = "Branch not found")
     })
+    @PermitAll
     @GetMapping("/nearest")
     public ResponseEntity<BranchResponseDto> findNearestBranch(@RequestParam String name, @RequestParam double latitude, @RequestParam double longitude) {
         Location location = new Location();

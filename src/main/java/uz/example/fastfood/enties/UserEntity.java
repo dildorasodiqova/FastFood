@@ -10,6 +10,7 @@ import uz.example.fastfood.enums.UserRole;
 import javax.xml.stream.Location;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Collections;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +33,6 @@ public class UserEntity extends BaseEntity {
     private LocalDateTime updateDate;
 
     public Collection<Object> getAuthorities() {
-        return role;
+        return Collections.singleton(role);
     }
 }

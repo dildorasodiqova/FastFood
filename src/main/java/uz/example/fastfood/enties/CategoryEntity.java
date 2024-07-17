@@ -15,6 +15,4 @@ import java.time.LocalDateTime;
 @Entity(name = "category")
 public class CategoryEntity extends BaseEntity{
     private String name;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 }

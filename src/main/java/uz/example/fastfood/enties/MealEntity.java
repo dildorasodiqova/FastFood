@@ -29,6 +29,5 @@ public class MealEntity extends BaseEntity{
 
     private String description;
     private String image; // Assuming this is a URL or file path
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+
 }

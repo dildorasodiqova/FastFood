@@ -25,6 +25,5 @@ public class OrderEntity extends BaseEntity {
     private BigDecimal totalCost;
     private int estimatedDeliveryTime;
 
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+
 }

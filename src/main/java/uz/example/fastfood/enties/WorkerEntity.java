@@ -21,6 +21,5 @@ public class WorkerEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+
 }
