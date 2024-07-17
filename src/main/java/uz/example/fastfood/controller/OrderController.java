@@ -5,11 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.example.fastfood.dtos.createDto.OrderCreateDto;
+import uz.example.fastfood.dtos.request.order.OrderUpdateStatusReqDTO;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
 import uz.example.fastfood.service.orderService.OrderService;
 
@@ -34,5 +32,14 @@ public class OrderController {
         return ResponseEntity.ok(
                 orderService.makeOrder(dto)
         );
+    }
+
+    @PutMapping("/status")
+    @PreAuthorize("hasRole('ROLE_OFITSIANT')")
+    public ResponseEntity<BaseResponse<?>> updateStatus(@RequestBody @Valid OrderUpdateStatusReqDTO dto){
+        log.info(
+                "Update status"
+        );
+        return ResponseEntity.ok(orderService.updateStatus(dto.getOrderId(),dto.getStatus()));
     }
 }

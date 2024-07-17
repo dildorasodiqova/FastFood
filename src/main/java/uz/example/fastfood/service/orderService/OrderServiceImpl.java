@@ -1,5 +1,6 @@
 package uz.example.fastfood.service.orderService;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.example.fastfood.dtos.createDto.OrderCreateDto;
@@ -15,6 +16,7 @@ import uz.example.fastfood.service.mealService.MealService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +49,12 @@ public class OrderServiceImpl implements OrderService {
                 .toList();
 
         orderItemRepository.saveAll(list);
+        return BaseResponse.successDefault();
+    }
+
+    @Override
+    public BaseResponse<?> updateStatus(UUID orderId, OrderStatus status) {
+        orderRepository.updateStatusById(status, orderId);
         return BaseResponse.successDefault();
     }
 }
