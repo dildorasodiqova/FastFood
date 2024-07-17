@@ -95,11 +95,11 @@ public class BranchController {
     })
     @PermitAll
     @GetMapping("/nearest")
-    public ResponseEntity<BranchResponseDto> findNearestBranch(@RequestParam String name, @RequestParam double latitude, @RequestParam double longitude) {
+    public ResponseEntity<BranchResponseDto> findNearestBranch( @RequestParam double latitude, @RequestParam double longitude) {
         Location location = new Location();
         location.setLatitude(latitude);
         location.setLongitude(longitude);
-        BranchResponseDto nearestBranch = branchService.findNearestBranch(name, location);
+        BranchResponseDto nearestBranch = branchService.findNearestBranch( location);
         return ResponseEntity.ok(nearestBranch);
     }
 }

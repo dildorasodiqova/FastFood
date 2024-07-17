@@ -15,7 +15,6 @@ import uz.example.fastfood.dtos.responcseDto.CategoryResponseDto;
 import uz.example.fastfood.service.categoryService.CategoryService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.example.fastfood.dtos.createDto.OrderCreateDto;
 import uz.example.fastfood.dtos.request.order.OrderUpdateStatusReqDTO;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
+import uz.example.fastfood.dtos.responcseDto.OrderResponseDto;
 import uz.example.fastfood.service.orderService.OrderService;
 
 import java.util.UUID;
@@ -48,8 +49,8 @@ public class OrderController {
 
     @GetMapping("/admin-all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<BaseResponse<PageImpl<?>>> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                            @RequestParam(value = "size", defaultValue = "50") int size) {
+    public ResponseEntity<BaseResponse<PageImpl<OrderResponseDto>>> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                                           @RequestParam(value = "size", defaultValue = "50") int size) {
         log
                 .info("get all page = {} size = {}", page, size);
         return ResponseEntity.ok(orderService.getAll(page, size));
@@ -57,7 +58,7 @@ public class OrderController {
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<BaseResponse<PageImpl<?>>> getAllAsUser(@RequestParam(value = "page", defaultValue = "0") int page,
+    public ResponseEntity<BaseResponse<PageImpl<OrderResponseDto>>> getAllAsUser(@RequestParam(value = "page", defaultValue = "0") int page,
                                                                   @RequestParam(value = "size", defaultValue = "50") int size) {
         log
                 .info("get all page = {} size = {}", page, size);

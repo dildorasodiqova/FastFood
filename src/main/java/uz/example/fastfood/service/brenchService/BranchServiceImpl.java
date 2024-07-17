@@ -30,8 +30,8 @@ public class BranchServiceImpl implements BranchService{
                 .collect(Collectors.toList());
     }
     @Override
-    public BranchResponseDto findNearestBranch(String name, Location location) {
-        BranchEntity nearestBranch = branchRepository.findNearestBranchWithName(name, location.getLatitude(), location.getLongitude());
+    public BranchResponseDto findNearestBranch(Location location) {
+        BranchEntity nearestBranch = branchRepository.findNearestBranchWithName(location.getLatitude(), location.getLongitude());
         return modelMapper.map(nearestBranch, BranchResponseDto.class);
     }
 
@@ -77,4 +77,6 @@ public class BranchServiceImpl implements BranchService{
     public void deleteBranch(UUID id) {
         branchRepository.softDeleteById(id);
     }
+
+
 }

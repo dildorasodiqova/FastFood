@@ -21,7 +21,7 @@ public interface BranchRepository extends JpaRepository<BranchEntity, UUID> {
 
     List<BranchEntity> findAllByIsActiveTrue();
 
-    @Query("SELECT b FROM branch b WHERE b.name = :name ORDER BY ST_Distance(b.location, ST_SetSRID(ST_Point(:longitude, :latitude), 4326)) ASC")
-    BranchEntity findNearestBranchWithName(@Param("name") String name, @Param("latitude") double latitude, @Param("longitude") double longitude);
+    @Query("SELECT b FROM branch b ORDER BY ST_Distance(b.location, ST_SetSRID(ST_MakePoint(:longitude, :latitude), 4326)) ASC")
+    BranchEntity findNearestBranchWithName(@Param("latitude") double latitude, @Param("longitude") double longitude);
 
 }

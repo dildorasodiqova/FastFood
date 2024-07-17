@@ -13,7 +13,7 @@ public interface BranchService {
     BranchResponseDto createBranch(BranchCreateDto dto);
     BranchResponseDto updateBranch(UUID id, BranchCreateDto dto);
     void deleteBranch(UUID id);
-    BranchResponseDto findNearestBranch(String name, Location location);
+    BranchResponseDto findNearestBranch(Location location);
 }
 
 

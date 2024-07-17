@@ -1,5 +1,7 @@
 package uz.example.fastfood.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +16,11 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
     @Modifying
     @Query("update orders o set o.status = ?1 where o.id = ?2")
     void updateStatusById(OrderStatus status, UUID id);
+
+    Page<OrderEntity> findAllByUserId(UUID userId, PageRequest pageRequest);
+
+    Page<OrderEntity> findAllByUserIdAndIsActiveTrue(UUID userId, PageRequest pageRequest);
+
+    Page<OrderEntity> findAllByIsActiveTrue(PageRequest pageRequest);
 }
+

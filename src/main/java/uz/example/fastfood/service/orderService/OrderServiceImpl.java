@@ -2,10 +2,16 @@ package uz.example.fastfood.service.orderService;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.example.fastfood.dtos.createDto.OrderCreateDto;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
+import uz.example.fastfood.dtos.responcseDto.OrderResponseDto;
 import uz.example.fastfood.enties.OrderEntity;
 import uz.example.fastfood.enties.OrderItemEntity;
 import uz.example.fastfood.enties.UserEntity;
@@ -24,8 +30,8 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderItemRepository orderItemRepository;
-
     private final OrderRepository orderRepository;
+    private final ModelMapper modelMapper;
     private final MealService mealService;
 
     private int calculateEstimatedDeliveryTime(int numberOfMeals, double distance) {
@@ -60,11 +66,29 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public BaseResponse<PageImpl<?>> getAll(int page, int size) {
-        return null;
+    @Transactional(readOnly = true)
+    public BaseResponse<PageImpl<OrderResponseDto>> getAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<OrderEntity> orderPage = orderRepository.findAllByIsActiveTrue(pageRequest);
+        List<OrderResponseDto> orderDtos = orderPage.getContent().stream()
+                .map(this::convertToDto)
+                .toList();
+        return  BaseResponse.success(new PageImpl<>(orderDtos, pageRequest, orderPage.getTotalElements()));
     }
+
     @Override
-    public BaseResponse<PageImpl<?>> getAllAsUser(UUID userId, int page, int size) {
-        return null;
+    @Transactional(readOnly = true)
+    public BaseResponse<PageImpl<OrderResponseDto>> getAllAsUser(UUID userId, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<OrderEntity> orderPage = orderRepository.findAllByUserIdAndIsActiveTrue(userId, pageRequest);
+        List<OrderResponseDto> orderDtos = orderPage.getContent().stream()
+                .map(this::convertToDto)
+                .toList();
+        return BaseResponse.success(new PageImpl<>(orderDtos, pageRequest, orderPage.getTotalElements()));
     }
+
+    private OrderResponseDto convertToDto(OrderEntity orderEntity) {
+        return modelMapper.map(orderEntity, OrderResponseDto.class);
+    }
+
 }
