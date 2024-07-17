@@ -3,6 +3,7 @@ package uz.example.fastfood.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,8 @@ public class OrderController {
 
     @PostMapping("/make")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<BaseResponse<?>> makeOrder(@RequestBody @Valid OrderCreateDto dto){
-        log.info("Make order with = {}",dto);
+    public ResponseEntity<BaseResponse<?>> makeOrder(@RequestBody @Valid OrderCreateDto dto) {
+        log.info("Make order with = {}", dto);
         return ResponseEntity.ok(
                 orderService.makeOrder(dto)
         );
@@ -36,10 +37,19 @@ public class OrderController {
 
     @PutMapping("/status")
     @PreAuthorize("hasRole('ROLE_OFITSIANT')")
-    public ResponseEntity<BaseResponse<?>> updateStatus(@RequestBody @Valid OrderUpdateStatusReqDTO dto){
+    public ResponseEntity<BaseResponse<?>> updateStatus(@RequestBody @Valid OrderUpdateStatusReqDTO dto) {
         log.info(
                 "Update status"
         );
-        return ResponseEntity.ok(orderService.updateStatus(dto.getOrderId(),dto.getStatus()));
+        return ResponseEntity.ok(orderService.updateStatus(dto.getOrderId(), dto.getStatus()));
+    }
+
+    @GetMapping("/admin-all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<BaseResponse<PageImpl<?>>> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                            @RequestParam(value = "size", defaultValue = "50") int size) {
+        log
+                .info("get all page = {} size = {}", page, size);
+        return ResponseEntity.ok(orderService.getAll(page,size));
     }
 }

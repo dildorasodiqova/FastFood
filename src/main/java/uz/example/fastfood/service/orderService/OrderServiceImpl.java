@@ -2,6 +2,7 @@ package uz.example.fastfood.service.orderService;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import uz.example.fastfood.dtos.createDto.OrderCreateDto;
 import uz.example.fastfood.dtos.responcseDto.BaseResponse;
@@ -56,5 +57,10 @@ public class OrderServiceImpl implements OrderService {
     public BaseResponse<?> updateStatus(UUID orderId, OrderStatus status) {
         orderRepository.updateStatusById(status, orderId);
         return BaseResponse.successDefault();
+    }
+
+    @Override
+    public BaseResponse<PageImpl<?>> getAll(int page, int size) {
+        return null;
     }
 }
