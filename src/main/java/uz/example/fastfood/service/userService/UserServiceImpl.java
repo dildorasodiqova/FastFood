@@ -35,22 +35,7 @@ public class UserServiceImpl implements UserService {
     private final LocationRepository locationRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    public UserResponseDto createUser(UserCreateDto dto) {
-        UserEntity user = modelMapper.map(dto, UserEntity.class);
-        Location location = modelMapper.map(dto.getLocation(), Location.class);
-        location.setUser(user);
-//        user.setLocation(location);
 
-        UserEntity savedUser = userRepository.save(user);
-        locationRepository.save(location);
-
-        return modelMapper.map(savedUser, UserResponseDto.class);
-    }
-
-    public UserResponseDto getUser(UUID userId) {
-        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new DataNotFoundException("User not found"));
-        return modelMapper.map(user, UserResponseDto.class);
-    }
 
     public UserEntity findByPhone(String phone) {
         return userRepository
