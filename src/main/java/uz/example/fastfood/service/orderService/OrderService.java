@@ -12,4 +12,6 @@ public interface OrderService {
     BaseResponse<?> updateStatus(UUID orderId, OrderStatus status);
 
     BaseResponse<PageImpl<?>> getAll(int page, int size);
+
+    BaseResponse<PageImpl<?>> getAllAsUser(UUID userId, int page, int size);
 }
