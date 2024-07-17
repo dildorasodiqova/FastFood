@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.example.fastfood.enums.UserRole;
 
 import javax.xml.stream.Location;
 import java.time.LocalDateTime;
@@ -15,14 +16,17 @@ import java.time.LocalDateTime;
 @Setter
 @Entity(name = "users")
 public class UserEntity extends BaseEntity {
-    private String name;
-    private String surname;
+
+    private String fullName;
+
     private String password;
+
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Location location;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     private LocalDateTime createDate;
+
     private LocalDateTime updateDate;
 }
