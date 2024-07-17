@@ -19,9 +19,10 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
+
     public List<CategoryResponseDto> getAllCategories() {
         List<CategoryEntity> all = categoryRepository.findAllByIsActiveTrue();
-
+        return map(all);
     }
 
     @Override

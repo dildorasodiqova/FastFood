@@ -15,9 +15,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import uz.work.worldcamp.service.jwt.AuthenticationService;
-import uz.work.worldcamp.service.jwt.JwtFilter;
-import uz.work.worldcamp.service.jwt.JwtService;
+import uz.example.fastfood.jwt.AuthenticationService;
+import uz.example.fastfood.jwt.JwtFilter;
+import uz.example.fastfood.jwt.JwtService;
 
 import java.util.Arrays;
 

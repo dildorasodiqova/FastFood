@@ -1,4 +1,17 @@
 package uz.example.fastfood.service.mealService;
 
+import uz.example.fastfood.dtos.createDto.MealCreateDto;
+import uz.example.fastfood.dtos.responcseDto.MealResponseDto;
+import uz.example.fastfood.enties.MealEntity;
+
+import java.util.List;
+import java.util.UUID;
+
 public interface MealService {
+    List<MealResponseDto> getAllMeals();
+    MealResponseDto getMealById(UUID id);
+    MealResponseDto createMeal(MealCreateDto dto);
+    MealResponseDto updateMeal(UUID id, MealCreateDto dto);
+
+    void deleteMeal(UUID id);
 }

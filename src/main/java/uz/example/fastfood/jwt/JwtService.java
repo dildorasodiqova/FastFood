@@ -30,7 +30,6 @@ public class JwtService {
     }
 
     public String generateAccessToken(UserEntity user) {
-        if(user.isEnabled()) {
             Date iat = new Date();
 
             return Jwts.builder()
@@ -40,12 +39,11 @@ public class JwtService {
                     .addClaims(getAuthorities(user))
                     .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
                     .compact();
-        }
-        throw new AuthenticationCredentialsNotFoundException("User is not active");
-    }
+
+         }
 
     public String generateRefreshToken(UserEntity user) {
-        if(user.isEnabled()) {
+
             Date iat = new Date();
 
             return Jwts.builder()
@@ -54,9 +52,8 @@ public class JwtService {
                     .setExpiration(new Date(iat.getTime() + refreshExpiry))
                     .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
                     .compact();
-        }
-        throw new AuthenticationCredentialsNotFoundException("User is not active");
-    }
+
+      }
 
     public Jws<Claims> extractToken(String token) {
         return Jwts.parserBuilder()
