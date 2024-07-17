@@ -15,12 +15,7 @@ import uz.example.fastfood.service.orderService.OrderService;
 
 import java.util.UUID;
 
-/**
- * @author Admin on 7/17/2024
- * @project FastFood
- * @package uz.example.fastfood.controller
- * @contact @sarvargo
- */
+
 @RestController
 @RequestMapping("/api/order")
 @RequiredArgsConstructor

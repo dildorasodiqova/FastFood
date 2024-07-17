@@ -30,9 +30,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
-    private final ModelMapper modelMapper;
     private final UserRepository userRepository;
-    private final LocationRepository locationRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 

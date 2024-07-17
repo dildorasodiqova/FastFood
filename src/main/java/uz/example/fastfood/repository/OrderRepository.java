@@ -9,15 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import uz.example.fastfood.enties.OrderEntity;
 import uz.example.fastfood.enums.OrderStatus;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
     @Transactional
     @Modifying
-    @Query("update orders o set o.status = ?1 where o.id = ?2")
+    @Query("update orderEntity o set o.status = ?1 where o.id = ?2")
     void updateStatusById(OrderStatus status, UUID id);
 
-    Page<OrderEntity> findAllByUserId(UUID userId, PageRequest pageRequest);
+
 
     Page<OrderEntity> findAllByUserIdAndIsActiveTrue(UUID userId, PageRequest pageRequest);
 

@@ -20,8 +20,6 @@ import uz.example.fastfood.repository.OrderItemRepository;
 import uz.example.fastfood.repository.OrderRepository;
 import uz.example.fastfood.service.mealService.MealService;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 

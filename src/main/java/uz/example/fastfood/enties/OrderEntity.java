@@ -16,13 +16,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "orders")
+@Entity(name = "orderEntity")
 public class OrderEntity extends BaseEntity {
     @Column(name = "user_id")
     private UUID userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private UserEntity user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
